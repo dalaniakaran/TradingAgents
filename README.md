@@ -1,4 +1,4 @@
-# 🇮🇳 TradingAgents – Multi-Agent Stock Strategy Platform
+# TradingAgents – Multi-Agent Stock Strategy Platform
 
 🚀 **TradingAgents** is a Streamlit-powered, multi-agent trading research platform inspired by professional trading firms.  
 It uses LLM-powered agents to simulate fundamental, technical, sentiment, and news analysis
