@@ -3,6 +3,15 @@ from datetime import datetime, timedelta
 import pandas as pd
 import requests
 import praw
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+NEWS_API_KEY = os.getenv("NEWSAPI_KEY")
+REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
+REDDIT_SECRET = os.getenv("REDDIT_SECRET")
+REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT", "TradingAgentsBot")
 
 def get_company_name(ticker: str) -> str:
     return yf.Ticker(ticker).info['longName']
@@ -40,7 +49,6 @@ def load_price_data(ticker: str, period: str = "3mo", interval: str = "1d") -> p
     return df
 
 # ---- SIMPLE NEWS FETCHER USING NewsAPI ---- #
-NEWS_API_KEY = "a3378fe6a6414a90aa6459a18021fe5d"  # Replace with your key
 def get_news_headlines(query: str, from_date: str, to_date: str) -> list:
     url = "https://newsapi.org/v2/everything"
     params = {
@@ -70,9 +78,9 @@ def get_last_week_dates():
 
 
 reddit = praw.Reddit(
-    client_id="O2QQHSQUT5JRUdnHO5Sb_Q",
-    client_secret="tKXGZcXffnF_4P6t-9k8UHpkx7EnHg",
-    user_agent="tradingagents-bot-v1"
+    client_id=REDDIT_CLIENT_ID,
+    client_secret=REDDIT_SECRET,
+    user_agent=REDDIT_USER_AGENT
 )
 
 def get_reddit_mentions(keyword: str, limit=10):
